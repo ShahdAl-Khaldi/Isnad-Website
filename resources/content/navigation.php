@@ -46,7 +46,7 @@ return [
     'main_nav' => [
         ['href' => '/', 'label' => 'Home'],
         ['href' => '/about', 'label' => 'About'],
-        ['href' => '/sponsor', 'label' => 'Partner'],
+        ['href' => '/sponsor', 'label' => 'Sponsorship'],
         ['href' => '/contact', 'label' => 'Contact'],
     ],
     'sponsor_nav_item' => [
