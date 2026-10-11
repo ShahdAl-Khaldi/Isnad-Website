@@ -22,7 +22,6 @@ RUN mkdir -p storage/framework/cache storage/framework/sessions storage/framewor
     && touch database/database.sqlite \
     && chmod -R 775 storage bootstrap/cache database
 
-ENV PORT=8000
 EXPOSE 8000
 
-CMD sh -c "php artisan config:cache && php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=$PORT"
+CMD ["sh", "-c", "php artisan config:cache; php artisan migrate --force; php artisan serve --host=0.0.0.0 --port=${PORT:-8000}"]
