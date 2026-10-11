@@ -1,0 +1,155 @@
+@import "tailwindcss";
+@import "./theme.css";
+
+@source "../js";
+
+/* Attribute-based dark mode: <html data-theme="dark">, toggled by ThemeToggle.jsx. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+@theme inline {
+  --color-navy: var(--isnad-navy);
+  --color-navy-deep: var(--isnad-navy-deep);
+  --color-blue: var(--isnad-blue);
+  --color-blue-strong: var(--isnad-blue-strong);
+  --color-blue-soft: var(--isnad-blue-soft);
+  --color-ink: var(--isnad-ink);
+  --color-ink-raised: var(--isnad-ink-raised);
+  --color-line-dark: var(--isnad-line-dark);
+  --color-paper: var(--isnad-paper);
+  --color-soft: var(--isnad-soft);
+  --color-line: var(--isnad-line);
+  --color-text: var(--isnad-text);
+  --color-muted: var(--isnad-text-muted);
+  --color-inverse: var(--isnad-text-inverse);
+  --color-inverse-muted: var(--isnad-text-inverse-muted);
+  --color-status-active: var(--isnad-active);
+  --color-status-planned: var(--isnad-planned);
+  --color-status-past: var(--isnad-past);
+  --color-status-error: var(--isnad-error);
+  --color-status-success: var(--isnad-success);
+
+  --font-sans: var(--isnad-font);
+  --font-arabic: var(--isnad-font-arabic);
+
+  --radius-sm: var(--isnad-radius-sm);
+  --radius-card: var(--isnad-radius);
+  --radius-card-lg: var(--isnad-radius-lg);
+  --radius-pill: var(--isnad-radius-pill);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: calc(var(--isnad-header-h) + 1rem);
+  }
+  @media (min-width: 768px) {
+    html { scroll-padding-top: calc(var(--isnad-header-h) + 1rem); }
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    html { scroll-behavior: smooth; }
+  }
+  body {
+    background: var(--isnad-paper);
+    color: var(--isnad-text);
+    font-family: var(--isnad-font);
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, h4 {
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+  p { text-wrap: pretty; }
+  ::selection { background: var(--isnad-navy); color: #fff; }
+  :focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+  [dir="rtl"] body { font-family: var(--isnad-font-arabic), var(--isnad-font); }
+}
+
+@layer components {
+  /* Condensed display type — headlines that carry the page */
+  .display {
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.08;
+  }
+  /* The Arabic name used as a large graphic element */
+  .ar-word {
+    font-family: var(--isnad-font-arabic);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: 0;
+  }
+
+  .container-page {
+    width: 100%;
+    max-width: var(--isnad-container);
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+  @media (min-width: 768px) { .container-page { padding-inline: 2.5rem; } }
+
+  /* Small label above headings: "—— OUR STORY" */
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--isnad-blue-strong);
+  }
+  .eyebrow::before {
+    content: "";
+    width: 2.25rem;
+    height: 1px;
+    background: currentColor;
+  }
+  .on-dark .eyebrow, .eyebrow-light { color: var(--isnad-blue); }
+
+  /* Faint grid lines used as background texture */
+  .grid-lines {
+    background-image:
+      linear-gradient(to right, var(--isnad-line) 1px, transparent 1px);
+    background-size: calc(100% / 6) 100%;
+  }
+  .grid-lines-dark {
+    background-image:
+      linear-gradient(to right, rgb(255 255 255 / 0.05) 1px, transparent 1px);
+    background-size: calc(100% / 6) 100%;
+  }
+
+  .placeholder-texture {
+    background-color: var(--isnad-soft);
+    background-image: repeating-linear-gradient(135deg, transparent 0 14px, rgb(0 0 0 / 0.04) 14px 15px);
+  }
+  .placeholder-texture-dark {
+    background-color: var(--isnad-ink-raised);
+    background-image: repeating-linear-gradient(135deg, transparent 0 14px, rgb(255 255 255 / 0.04) 14px 15px);
+  }
+}
+
+@layer utilities {
+  /* text-navy / text-blue-strong are also used as fixed dark text inside
+     always-white buttons (e.g. bg-white text-navy) — those spots opt out
+     with an arbitrary-value class (text-[var(--isnad-navy)]) so they don't
+     match this selector and stay readable in both themes. */
+  :root[data-theme="dark"] .text-navy { color: var(--isnad-blue); }
+  :root[data-theme="dark"] .text-blue-strong { color: var(--isnad-blue); }
+  :root[data-theme="dark"] .bg-blue-soft { background-color: rgb(169 187 211 / 0.16); }
+
+  .text-balance { text-wrap: balance; }
+  @keyframes spin-slow { to { transform: rotate(360deg); } }
+  .animate-spin-slow { animation: spin-slow 18s linear infinite; }
+  @media (prefers-reduced-motion: reduce) {
+    .animate-spin-slow { animation: none; }
+  }
+}

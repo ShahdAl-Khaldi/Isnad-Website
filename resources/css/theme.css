@@ -1,0 +1,67 @@
+/* ═══════════════════════════════════════════════════════════════════
+   ISNAD — BRAND THEME
+   The one file to edit for colours, fonts and shapes. Every React
+   component reads these variables (through Tailwind classes such as
+   bg-ink, text-blue, bg-navy, rounded-card).
+   Palette: black, ISNAD navy and white only (plus navy tints).
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* Brand */
+  --isnad-navy: #113356;          /* logo navy — the signature colour */
+  --isnad-navy-deep: #0a1f38;
+  --isnad-blue: #a9bbd3;          /* pale navy — highlights on black/navy backgrounds */
+  --isnad-blue-strong: #113356;   /* navy — buttons and highlights on white */
+  --isnad-blue-soft: #e7ecf3;     /* navy tint — soft backgrounds */
+
+  /* Dark surfaces */
+  --isnad-ink: #000000;           /* black */
+  --isnad-ink-raised: #0c0f14;
+  --isnad-line-dark: rgb(255 255 255 / 0.12);
+
+  /* Light surfaces */
+  --isnad-paper: #ffffff;
+  --isnad-soft: #eef1f5;
+  --isnad-line: #dde3eb;
+
+  /* Text */
+  --isnad-text: #000000;
+  --isnad-text-muted: #4f5d6f;
+  --isnad-text-inverse: #f4f5f7;
+  --isnad-text-inverse-muted: #9aa8bb;
+
+  /* Status */
+  --isnad-active: #2f8a5b;
+  --isnad-planned: #b7791f;
+  --isnad-past: #6b7280;
+  --isnad-error: #c2413a;
+  --isnad-success: #2f8a5b;
+
+  /* Typography (fonts are bundled from npm — see resources/js/main.jsx) */
+  --isnad-font: "Manrope Variable", "Manrope", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --isnad-font-arabic: "IBM Plex Sans Arabic", "Segoe UI", Tahoma, sans-serif;
+
+  /* Shape */
+  --isnad-radius-sm: 6px;
+  --isnad-radius: 10px;
+  --isnad-radius-lg: 14px;
+  --isnad-radius-pill: 999px;
+
+  --isnad-container: 1240px;
+  --isnad-header-h: 4.5rem;    /* main bar height (top contact bar adds 2.5rem on tablet+) */
+}
+
+/* ─── Dark mode ──────────────────────────────────────────────────────
+   Toggled by setting data-theme="dark" on <html> (see ThemeToggle.jsx).
+   Only the "whole-page surface" tokens flip here. --isnad-navy and
+   --isnad-blue-soft stay as-is because they're also used as solid accent
+   backgrounds (bg-navy, bg-blue-soft) that must stay the same bold navy
+   in both themes — their *text* roles are flipped separately in app.css. */
+:root[data-theme="dark"] {
+  --isnad-paper: #0b0d12;
+  --isnad-soft: #12151c;
+  --isnad-line: rgb(255 255 255 / 0.14);
+  --isnad-text: #eef1f5;
+  --isnad-text-muted: #9aa8bb;
+  --isnad-ink: #eef1f5;
+}
