@@ -3,9 +3,9 @@ FROM php:8.3-cli-alpine
 
 RUN apk add --no-cache \
         nodejs npm \
-        git unzip sqlite \
-        oniguruma-dev icu-dev \
-    && docker-php-ext-install pdo pdo_sqlite mbstring bcmath intl \
+        git unzip sqlite-dev \
+        oniguruma-dev \
+    && docker-php-ext-install pdo pdo_sqlite mbstring bcmath \
     && rm -rf /var/cache/apk/*
 
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
