@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: isnad
+    name: isnad-education
     env: docker
     plan: free
     autoDeploy: true
